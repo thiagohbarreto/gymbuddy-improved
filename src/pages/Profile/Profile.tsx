@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, User, Settings, Moon, Sun, Award, Target, Calculator } from 'lucide-react';
+import { ArrowLeft, User, Settings, Moon, Sun, Award, Calculator } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAppStore } from '../../store/useAppStore';
 import { BackupExport } from '../../components/Backup/BackupExport';
 import { PushNotifications } from '../../components/Notifications/PushNotifications';
 import { TestRunner } from '../../components/Tests/TestRunner';
-import { authService } from '../../services/auth';
+
 import toast from 'react-hot-toast';
 
 const Profile = () => {
@@ -29,8 +29,8 @@ const Profile = () => {
       id: user?.id || 1,
       nome: formData.nome,
       email: formData.email,
-      peso: formData.peso ? parseFloat(formData.peso) : undefined,
-      altura: formData.altura ? parseFloat(formData.altura) : undefined,
+      peso: formData.peso ? parseFloat(formData.peso.toString()) : undefined,
+      altura: formData.altura ? parseFloat(formData.altura.toString()) : undefined,
       objetivo: formData.objetivo
     };
     
@@ -41,8 +41,8 @@ const Profile = () => {
 
   const calcularIMC = () => {
     if (formData.peso && formData.altura) {
-      const peso = parseFloat(formData.peso);
-      const altura = parseFloat(formData.altura) / 100; // converter cm para m
+      const peso = parseFloat(formData.peso.toString());
+      const altura = parseFloat(formData.altura.toString()) / 100; // converter cm para m
       return (peso / (altura * altura)).toFixed(1);
     }
     return null;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Download, Upload, Database, FileText } from 'lucide-react';
+import { Database, FileText } from 'lucide-react';
 import { useTreinos } from '../../hooks/useTreinos';
 import { useHistorico } from '../../hooks/useHistorico';
 import { useAppStore } from '../../store/useAppStore';
@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 
 export const BackupExport = () => {
   const [isExporting, setIsExporting] = useState(false);
-  const [isImporting, setIsImporting] = useState(false);
+
   
   const { data: treinos } = useTreinos();
   const { data: historico } = useHistorico(1000);

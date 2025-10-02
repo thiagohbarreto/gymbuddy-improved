@@ -59,14 +59,14 @@ class ApiClient {
         if (response.status === 401 && !endpoint.includes('/auth/login')) {
           this.setToken(null);
           window.location.href = '/login';
-          return;
+          return null as T;
         }
         
         throw new Error(errorMessage);
       }
       
       if (response.status === 204) {
-        return null as T;
+        return {} as T;
       }
       
       return await response.json();

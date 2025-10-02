@@ -3,11 +3,11 @@ import { useAppStore } from '../store/useAppStore';
 
 export const useTimer = () => {
   const { timerActive, timerSeconds, stopTimer } = useAppStore();
-  const intervalRef = useRef<NodeJS.Timeout>();
+  const intervalRef = useRef<number>();
 
   useEffect(() => {
     if (timerActive && timerSeconds > 0) {
-      intervalRef.current = setInterval(() => {
+      intervalRef.current = window.setInterval(() => {
         useAppStore.setState((state) => ({
           timerSeconds: state.timerSeconds - 1
         }));
