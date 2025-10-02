@@ -259,7 +259,6 @@ const Profile = () => {
             <div className="mt-6">
               <TestRunner />
             </div>
-            </div>
           </div>
         )}
 
