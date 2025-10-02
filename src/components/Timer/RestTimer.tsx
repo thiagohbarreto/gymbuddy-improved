@@ -26,7 +26,7 @@ export const RestTimer = () => {
       <motion.div
         className="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 z-50"
         initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0, x: position.x, y: position.y }}
+        animate={{ opacity: 1, x: position.x, y: position.y }}
         exit={{ opacity: 0, y: 50 }}
         drag
         dragMomentum={false}
