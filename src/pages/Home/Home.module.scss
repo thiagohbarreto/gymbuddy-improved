@@ -1,0 +1,272 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+}
+
+.quickStats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-surface);
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.achievements {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--color-surface);
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+
+  h2 {
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+}
+
+.achievementsList {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.achievement {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--color-background);
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  flex: 1;
+  min-width: 200px;
+
+  .icon {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 0.9rem;
+    color: var(--color-text);
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+  }
+}
+
+.treinos {
+  margin-bottom: 2rem;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  h2 {
+    color: var(--color-text);
+    margin: 0;
+  }
+}
+
+.viewStats {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.divisoes {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.divisaoCard {
+  background: var(--color-surface);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  transition: transform 0.2s;
+
+  h3 {
+    margin: 0 0 1rem 0;
+    color: var(--color-text);
+    font-size: 1.2rem;
+  }
+}
+
+.treinosList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.treinoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: var(--color-background);
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
+
+.treinoInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  .letra {
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .titulo {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actionBtn {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-background);
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+  }
+
+  &.danger:hover {
+    background: var(--color-danger);
+    border-color: var(--color-danger);
+  }
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--color-text-secondary);
+}
+
+.createSection {
+  text-align: center;
+}
+
+.createBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-1px);
+  }
+}
+
+.error {
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-danger);
+  background: var(--color-surface);
+  border-radius: 8px;
+  border: 1px solid var(--color-danger);
+}
+
+// Override para ícones
+:global(.icon),
+:global(svg) {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+:global([data-theme="dark"]) {
+  :global(.icon),
+  :global(svg) {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .quickStats {
+    gap: 1rem;
+  }
+
+  .stat {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .divisoes {
+    grid-template-columns: 1fr;
+  }
+
+  .treinoItem {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+}
