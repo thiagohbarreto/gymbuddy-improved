@@ -40,7 +40,7 @@ const Home = () => {
   };
 
   if (isLoading) return <LoadingSpinner size="large" text="Carregando treinos..." />;
-  if (error) return <div className={styles.error}>Erro ao carregar treinos</div>;
+  if (error) return <div className="text-red-500 p-4">Erro ao carregar treinos</div>;
 
   // Agrupar treinos por divisão
   const treinosPorDivisao = treinos?.reduce((acc: { [key: string]: Treino[] }, treino) => {
