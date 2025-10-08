@@ -8,7 +8,7 @@ import { useStats } from '../../hooks/useStats';
 import { LoadingSpinner } from '../../components/UI/LoadingSpinner';
 import { Icon } from '../../components/Icon/Icon';
 import { Treino } from '../../types';
-import styles from './Home.module.scss';
+
 import toast from 'react-hot-toast';
 
 const Home = () => {

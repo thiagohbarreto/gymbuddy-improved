@@ -106,40 +106,7 @@ export const useAppStore = create<AppState>()(
           exercicios_favoritos: []
         }
       }),
-      storage: {
-        getItem: (name) => {
-          try {
-            const currentData = localStorage.getItem(name);
-            if (!currentData) return null;
-            const data = JSON.parse(currentData);
-            const key = `${name}-${data.user?.id || 'guest'}`;
-            return localStorage.getItem(key);
-          } catch {
-            return localStorage.getItem(`${name}-guest`);
-          }
-        },
-        setItem: (name, value) => {
-          try {
-            const data = JSON.parse(value);
-            const key = `${name}-${data.user?.id || 'guest'}`;
-            localStorage.setItem(key, value);
-          } catch {
-            localStorage.setItem(`${name}-guest`, value);
-          }
-        },
-        removeItem: (name) => {
-          try {
-            const currentData = localStorage.getItem(name);
-            if (currentData) {
-              const data = JSON.parse(currentData);
-              const key = `${name}-${data.user?.id || 'guest'}`;
-              localStorage.removeItem(key);
-            }
-          } catch {
-            localStorage.removeItem(`${name}-guest`);
-          }
-        }
-      }
+
     }
   )
 );

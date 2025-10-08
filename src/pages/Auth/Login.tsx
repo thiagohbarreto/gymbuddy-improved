@@ -10,7 +10,7 @@ import { useDivisoesStore } from '../../store/useDivisoesStore';
 import { Icon } from '../../components/Icon/Icon';
 import toast from 'react-hot-toast';
 import { useAuthActions } from '../../services/auth';
-import styles from './Login.module.scss';
+
 
 const loginSchema = z.object({
   email: z.string().email('Email inválido'),

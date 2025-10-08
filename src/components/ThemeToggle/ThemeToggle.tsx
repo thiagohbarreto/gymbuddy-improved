@@ -1,7 +1,7 @@
 import { Sun, Moon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAppStore } from '../../store/useAppStore';
-import styles from './ThemeToggle.module.scss';
+
 
 export const ThemeToggle = () => {
   const { theme, toggleTheme } = useAppStore();
@@ -9,7 +9,7 @@ export const ThemeToggle = () => {
   return (
     <motion.button
       onClick={toggleTheme}
-      className={styles.themeToggle}
+      className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       initial={false}
@@ -26,7 +26,7 @@ export const ThemeToggle = () => {
       >
         {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
       </motion.div>
-      <span className={styles.label}>
+      <span className="text-sm font-medium">
         {theme === 'dark' ? 'Claro' : 'Escuro'}
       </span>
     </motion.button>

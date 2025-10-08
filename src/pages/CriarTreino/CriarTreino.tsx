@@ -80,6 +80,7 @@ const CriarTreino = () => {
     }
 
     const exerciciosComOrdem = exercicios.map((ex, index) => ({
+      id: Date.now() + index,
       ...ex,
       ordem: index + 1,
       treino_id: 0

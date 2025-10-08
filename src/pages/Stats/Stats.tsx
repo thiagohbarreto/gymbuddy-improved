@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useStats } from '../../hooks/useStats';
 import { LoadingSpinner } from '../../components/UI/LoadingSpinner';
 
-import styles from './Stats.module.scss';
+
 
 const Stats = () => {
   const navigate = useNavigate();
