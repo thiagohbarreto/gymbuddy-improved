@@ -1,38 +1,32 @@
-const users = [
-  {
-    id: 1,
-    nome: 'Usuario Demo',
-    email: 'demo@gymbuddy.com',
-    password: 'password'
-  }
-];
-
 export default function handler(req, res) {
+  // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    res.status(200).end();
+    return;
   }
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method === 'POST') {
+    const { email, password } = req.body || {};
+    
+    if (email === 'demo@gymbuddy.com' && password === 'password') {
+      res.json({ 
+        user: { 
+          id: 1, 
+          nome: 'Usuario Demo', 
+          email: 'demo@gymbuddy.com' 
+        }, 
+        token: 'demo-token-123' 
+      });
+      return;
+    }
+    
+    res.status(401).json({ error: 'Email ou senha incorretos' });
+    return;
   }
 
-  const { email, password } = req.body || {};
-
-  if (!email || !password) {
-    return res.status(400).json({ error: 'Email e senha são obrigatórios' });
-  }
-
-  const user = users.find(u => u.email === email && u.password === password);
-  if (!user) {
-    return res.status(401).json({ error: 'Email ou senha incorretos' });
-  }
-
-  const token = 'demo-token-' + Date.now();
-  const { password: _, ...userWithoutPassword } = user;
-
-  res.json({ user: userWithoutPassword, token });
+  res.status(405).json({ error: 'Method not allowed' });
 }

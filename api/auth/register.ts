@@ -1,33 +1,25 @@
 export default function handler(req, res) {
+  // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    res.status(200).end();
+    return;
   }
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method === 'POST') {
+    res.status(201).json({ 
+      user: { 
+        id: 1, 
+        nome: 'Novo Usuario', 
+        email: 'novo@gymbuddy.com' 
+      }, 
+      token: 'demo-token-123' 
+    });
+    return;
   }
 
-  const { nome, email, password } = req.body || {};
-
-  if (!nome || !email || !password) {
-    return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
-  }
-
-  if (password.length < 6) {
-    return res.status(400).json({ error: 'Senha deve ter pelo menos 6 caracteres' });
-  }
-  
-  const newUser = {
-    id: Date.now(),
-    nome,
-    email
-  };
-
-  const token = 'demo-token-' + Date.now();
-
-  res.status(201).json({ user: newUser, token });
+  res.status(405).json({ error: 'Method not allowed' });
 }
