@@ -1,4 +1,34 @@
-const BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5174/api' : '/api');
+const BASE_URL = import.meta.env.VITE_API_URL || '/api';
+
+// Mock data para desenvolvimento
+const mockData = {
+  '/api/treinos/recentes': [
+    {
+      id: 1,
+      titulo: 'Peito e Tríceps',
+      divisao: 'A',
+      data_execucao: new Date().toISOString(),
+      tempo_total: 3600,
+      volume_total: 2500
+    }
+  ],
+  '/api/historico/stats': {
+    total_treinos: 15,
+    streak_atual: 3,
+    melhor_streak: 7,
+    volume_total: 45000,
+    tempo_total: 54000,
+    exercicios_favoritos: ['Supino', 'Agachamento', 'Levantamento Terra']
+  },
+  '/api/auth/login': {
+    user: { id: 1, nome: 'Usuario Demo', email: 'demo@gymbuddy.com' },
+    token: 'demo-token-' + Date.now()
+  },
+  '/api/auth/register': {
+    user: { id: Date.now(), nome: 'Novo Usuario', email: 'novo@gymbuddy.com' },
+    token: 'demo-token-' + Date.now()
+  }
+};
 
 class ApiClient {
   private baseURL: string;
@@ -25,6 +55,27 @@ class ApiClient {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<T> {
+    // Em desenvolvimento, usar mock data
+    if (import.meta.env.DEV) {
+      const mockKey = `${this.baseURL}${endpoint}` as keyof typeof mockData;
+      if (mockData[mockKey]) {
+        // Simular delay de rede
+        await new Promise(resolve => setTimeout(resolve, 300));
+        
+        // Para login/register, verificar credenciais
+        if (endpoint.includes('/auth/login')) {
+          const body = JSON.parse(options.body as string || '{}');
+          if (body.email === 'demo@gymbuddy.com' && body.password === 'password') {
+            return mockData[mockKey] as T;
+          } else {
+            throw new Error('Email ou senha incorretos');
+          }
+        }
+        
+        return mockData[mockKey] as T;
+      }
+    }
+
     const url = `${this.baseURL}${endpoint}`;
     
     const headers: Record<string, string> = {
@@ -46,7 +97,6 @@ class ApiClient {
       const response = await fetch(url, config);
       
       if (!response.ok) {
-        // Tentar extrair mensagem de erro do servidor
         let errorMessage = `HTTP error! status: ${response.status}`;
         try {
           const errorData = await response.json();
@@ -55,7 +105,6 @@ class ApiClient {
           // Se não conseguir fazer parse do JSON, usa mensagem padrão
         }
         
-        // Só redireciona para login se for 401 E não for uma requisição de login
         if (response.status === 401 && !endpoint.includes('/auth/login')) {
           this.setToken(null);
           window.location.href = '/login';
