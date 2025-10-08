@@ -487,3 +487,57 @@ input, textarea, select {
   background: var(--color-text-secondary);
 }
 
+// Correções específicas para problemas visuais
+.w-full {
+  width: 100%;
+}
+
+.space-y-6 > * + * {
+  margin-top: 1.5rem;
+}
+
+.space-y-4 > * + * {
+  margin-top: 1rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-red-500 {
+  color: #ef4444 !important;
+}
+
+.hover\:bg-gray-100:hover {
+  background-color: #f3f4f6;
+}
+
+.hover\:bg-gray-200:hover {
+  background-color: #e5e7eb;
+}
+
+.transition-colors {
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.hover\:text-red-700:hover {
+  color: #b91c1c !important;
+}
+
+// Correção para botões de deletar
+button.text-red-500,
+button.text-red-700 {
+  background: transparent !important;
+  border: none !important;
+  padding: 0.25rem !important;
+  
+  &:hover {
+    background: rgba(239, 68, 68, 0.1) !important;
+  }
+}
+
+[data-theme="dark"] button.text-red-500:hover,
+[data-theme="dark"] button.text-red-700:hover {
+  background: rgba(248, 113, 113, 0.1) !important;
+}
+

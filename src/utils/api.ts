@@ -27,6 +27,13 @@ const mockData = {
   '/api/auth/register': {
     user: { id: Date.now(), nome: 'Novo Usuario', email: 'novo@gymbuddy.com' },
     token: 'demo-token-' + Date.now()
+  },
+  '/api/treinos': {
+    id: Date.now(),
+    titulo: 'Novo Treino',
+    divisao: 'A',
+    identificador: 'A',
+    exercicios: []
   }
 };
 
@@ -62,7 +69,7 @@ class ApiClient {
         // Simular delay de rede
         await new Promise(resolve => setTimeout(resolve, 300));
         
-        // Para login/register, verificar credenciais
+        // Para login, verificar credenciais
         if (endpoint.includes('/auth/login')) {
           const body = JSON.parse(options.body as string || '{}');
           if (body.email === 'demo@gymbuddy.com' && body.password === 'password') {
@@ -70,6 +77,16 @@ class ApiClient {
           } else {
             throw new Error('Email ou senha incorretos');
           }
+        }
+        
+        // Para criar treino
+        if (endpoint.includes('/treinos') && options.method === 'POST') {
+          const body = JSON.parse(options.body as string || '{}');
+          return {
+            id: Date.now(),
+            ...body,
+            exercicios: body.exercicios || []
+          } as T;
         }
         
         return mockData[mockKey] as T;
