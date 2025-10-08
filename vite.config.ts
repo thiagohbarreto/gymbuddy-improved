@@ -17,13 +17,5 @@ export default defineConfig({
         warn(warning)
       }
     }
-  },
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3002',
-        changeOrigin: true
-      }
-    }
   }
 });
