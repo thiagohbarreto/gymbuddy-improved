@@ -1,8 +1,7 @@
-export default function handler(req, res) {
-  // CORS
+module.exports = (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
     res.status(200).end();
@@ -12,14 +11,14 @@ export default function handler(req, res) {
   if (req.method === 'POST') {
     res.status(201).json({ 
       user: { 
-        id: 1, 
+        id: Date.now(), 
         nome: 'Novo Usuario', 
         email: 'novo@gymbuddy.com' 
       }, 
-      token: 'demo-token-123' 
+      token: 'demo-token-' + Date.now()
     });
     return;
   }
 
   res.status(405).json({ error: 'Method not allowed' });
-}
+};
