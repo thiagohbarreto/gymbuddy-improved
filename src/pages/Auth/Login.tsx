@@ -6,7 +6,6 @@ import { z } from 'zod';
 import { Eye, EyeOff, Dumbbell } from 'lucide-react';
 import { useAppStore } from '../../store/useAppStore';
 import { useDivisoesStore } from '../../store/useDivisoesStore';
-import { useAuthActions } from '../../services/auth';
 import toast from 'react-hot-toast';
 import styles from './Login.module.scss';
 
@@ -21,7 +20,6 @@ const Login = () => {
   const navigate = useNavigate();
   const { setUser } = useAppStore();
   const { setCurrentUser } = useDivisoesStore();
-  const { loginWithInvalidation } = useAuthActions();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -36,21 +34,24 @@ const Login = () => {
   const onSubmit = async (data: LoginForm) => {
     setIsLoading(true);
 
-    try {
-      const user = await loginWithInvalidation({
-        email: data.email,
-        password: data.password,
-      });
+    setTimeout(() => {
+      // Validação simples de credenciais
+      if (data.email === 'demo@gymbuddy.com' && data.password === '123456') {
+        const mockUser = {
+          id: 1,
+          nome: 'Usuário Demo',
+          email: data.email,
+        };
 
-      setUser(user);
-      setCurrentUser(user.id);
-      toast.success('Login realizado com sucesso!');
-      navigate('/');
-    } catch (error: any) {
-      toast.error(error.message || 'Email ou senha incorretos!');
-    } finally {
+        setUser(mockUser);
+        setCurrentUser(mockUser.id);
+        toast.success('Login realizado com sucesso!');
+        navigate('/');
+      } else {
+        toast.error('Email ou senha incorretos!');
+      }
       setIsLoading(false);
-    }
+    }, 1000);
   };
 
   return (
