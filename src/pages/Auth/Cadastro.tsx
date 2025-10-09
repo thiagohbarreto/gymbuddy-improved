@@ -9,7 +9,7 @@ import { useAppStore } from '../../store/useAppStore';
 import { useDivisoesStore } from '../../store/useDivisoesStore';
 import { Icon } from '../../components/Icon/Icon';
 import toast from 'react-hot-toast';
-import { useAuthActions } from '../../services/auth';
+
 
 
 const cadastroSchema = z
@@ -30,7 +30,7 @@ const Cadastro = () => {
   const navigate = useNavigate();
   const { setUser } = useAppStore();
   const { setCurrentUser } = useDivisoesStore();
-  const { registerWithInvalidation } = useAuthActions();
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -46,22 +46,19 @@ const Cadastro = () => {
   const onSubmit = async (data: CadastroForm) => {
     setIsLoading(true);
 
-    try {
-      const user = await registerWithInvalidation({
+    setTimeout(() => {
+      const newUser = {
+        id: Date.now(),
         nome: data.nome,
         email: data.email,
-        password: data.password,
-      });
+      };
 
-      setUser(user);
-      setCurrentUser(user.id);
+      setUser(newUser);
+      setCurrentUser(newUser.id);
       toast.success('Conta criada com sucesso!');
       navigate('/');
-    } catch (error: any) {
-      toast.error(error.message || 'Erro ao criar conta. Tente novamente.');
-    } finally {
       setIsLoading(false);
-    }
+    }, 1000);
   };
 
   return (
