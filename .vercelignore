@@ -2,3 +2,10 @@
 .env*
 .git/
 node_modules/
+api/src/
+api/data/
+api/.env
+api/package.json
+api/tsconfig.json
+api/users.json
+api/treinos.json
