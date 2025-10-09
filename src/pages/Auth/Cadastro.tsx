@@ -3,14 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Eye, EyeOff, Dumbbell, UserPlus } from 'lucide-react';
+import { Eye, EyeOff, UserPlus } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAppStore } from '../../store/useAppStore';
 import { useDivisoesStore } from '../../store/useDivisoesStore';
-import { Icon } from '../../components/Icon/Icon';
 import toast from 'react-hot-toast';
-
-
 
 const cadastroSchema = z
   .object({
@@ -30,7 +27,6 @@ const Cadastro = () => {
   const navigate = useNavigate();
   const { setUser } = useAppStore();
   const { setCurrentUser } = useDivisoesStore();
-
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -83,7 +79,7 @@ const Cadastro = () => {
               margin: '0 auto 1rem',
             }}
           >
-            <Icon Icon={UserPlus} size={40} color="white" />
+            <UserPlus size={40} color="white" />
           </div>
           <h1>Criar Conta</h1>
           <p>Comece sua jornada fitness hoje</p>
@@ -156,11 +152,7 @@ const Cadastro = () => {
                   padding: '0.25rem',
                 }}
               >
-                {showPassword ? (
-                  <Icon Icon={EyeOff} color="secondary" />
-                ) : (
-                  <Icon Icon={Eye} color="secondary" />
-                )}
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
             {errors.password && (
@@ -183,7 +175,7 @@ const Cadastro = () => {
                 {...register('confirmPassword')}
                 type={showConfirmPassword ? 'text' : 'password'}
                 className="input-field"
-                placeholder="Digite sua senha"
+                placeholder="Confirme sua senha"
                 style={{ paddingRight: '3rem' }}
               />
               <button
@@ -200,11 +192,7 @@ const Cadastro = () => {
                   padding: '0.25rem',
                 }}
               >
-                {showConfirmPassword ? (
-                  <Icon Icon={EyeOff} color="secondary" />
-                ) : (
-                  <Icon Icon={Eye} color="secondary" />
-                )}
+                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
             {errors.confirmPassword && (
