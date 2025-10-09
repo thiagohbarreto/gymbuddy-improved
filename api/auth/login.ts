@@ -11,7 +11,7 @@ module.exports = (req: any, res: any) => {
   if (req.method === 'POST') {
     const { email, password } = req.body || {};
     
-    if (email === 'demo@gymbuddy.com' && password === 'password') {
+    if (email === 'demo@gymbuddy.com' && password && password.length >= 6) {
       res.json({ 
         user: { 
           id: 1, 

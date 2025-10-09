@@ -71,7 +71,7 @@ const Login = () => {
               {...register('email')}
               type="email"
               className={styles.input}
-              placeholder="seu@email.com"
+              placeholder="demo@gymbuddy.com"
             />
             {errors.email && (
               <p className={styles.error}>{errors.email.message}</p>
@@ -85,7 +85,7 @@ const Login = () => {
                 {...register('password')}
                 type={showPassword ? 'text' : 'password'}
                 className={styles.input}
-                placeholder="••••••••"
+                placeholder="123456"
               />
               <button
                 type="button"
