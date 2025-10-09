@@ -1,4 +1,6 @@
-const BASE_URL = 'http://localhost:3002/api';
+const BASE_URL = import.meta.env.PROD 
+  ? 'https://gymbuddy-improved.vercel.app/api' 
+  : 'http://localhost:3002/api';
 
 class ApiClient {
   private baseURL: string;
