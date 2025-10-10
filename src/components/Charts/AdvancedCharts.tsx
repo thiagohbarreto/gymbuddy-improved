@@ -1,5 +1,6 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
-import { useHistorico, useStats } from '../../hooks/useHistorico';
+import { useHistorico } from '../../hooks/useHistorico';
+import { useStats } from '../../hooks/useStats';
 import { LoadingSpinner } from '../UI/LoadingSpinner';
 import { format, subDays, eachDayOfInterval } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
