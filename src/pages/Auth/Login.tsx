@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { Eye, EyeOff, Dumbbell } from 'lucide-react';
 import { useAppStore } from '../../store/useAppStore';
 import { useDivisoesStore } from '../../store/useDivisoesStore';
+import { useDivisoesStore } from '../../store/useDivisoesStore';
 import toast from 'react-hot-toast';
 import styles from './Login.module.scss';
 
@@ -19,6 +20,7 @@ type LoginForm = z.infer<typeof loginSchema>;
 const Login = () => {
   const navigate = useNavigate();
   const { setUser } = useAppStore();
+  const { setCurrentUser } = useDivisoesStore();
   const { setCurrentUser } = useDivisoesStore();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -44,6 +46,7 @@ const Login = () => {
         };
 
         setUser(mockUser);
+        setCurrentUser(mockUser.id);
         setCurrentUser(mockUser.id);
         toast.success('Login realizado com sucesso!');
         navigate('/');
